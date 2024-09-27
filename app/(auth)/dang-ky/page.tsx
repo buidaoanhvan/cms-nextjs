@@ -11,7 +11,7 @@ export default async function RegisterPage() {
 
   return (
     <Flex vertical gap={24} style={{ maxWidth: 333, width: "100%" }}>
-      <Logo width={40} height={40} />
+      <Logo width={40} height={40} title="Đăng ký CMS" />
       <Form
         style={{ maxWidth: 333, width: "100%" }}
         onFinish={onFinish}

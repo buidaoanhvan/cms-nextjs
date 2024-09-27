@@ -1,11 +1,15 @@
-import { Flex, Image } from "antd";
+import { Flex, Image, Typography } from "antd";
 
 export default function Logo({
   width,
   height,
+  title,
+  titleColor,
 }: {
   width: number;
   height: number;
+  title?: string;
+  titleColor?: string;
 }) {
   return (
     <Flex justify="center" align="center">
@@ -16,6 +20,12 @@ export default function Logo({
         width={width}
         height={height}
       />
+      <Typography.Title
+        level={3}
+        style={{ margin: 0, color: titleColor, marginLeft: 10 }}
+      >
+        {title}
+      </Typography.Title>
     </Flex>
   );
 }

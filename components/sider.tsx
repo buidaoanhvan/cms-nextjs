@@ -1,4 +1,4 @@
-import { Layout, Menu, Image } from "antd";
+import { Layout, Menu } from "antd";
 import { UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
 import Link from "next/link";
 const { Sider } = Layout;
@@ -47,12 +47,12 @@ export default function SiderBar({
       trigger={null}
     >
       <Link href="/" className="flex items-center justify-center p-4">
-        <Logo width={32} height={32} />
+        <Logo width={32} height={32} title="CMS" titleColor="#fff" />
       </Link>
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={[pathname]}
+        selectedKeys={[pathname]}
         items={items}
       />
     </Sider>

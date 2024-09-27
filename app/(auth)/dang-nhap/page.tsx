@@ -11,7 +11,7 @@ export default async function LoginPage() {
 
   return (
     <Flex vertical gap={24} style={{ maxWidth: 333, width: "100%" }}>
-      <Logo width={40} height={40} />
+      <Logo width={40} height={40} title="Đăng nhập CMS" />
       <Form style={{ width: "100%" }} onFinish={onFinish}>
         <Form.Item name="email">
           <Input
