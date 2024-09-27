@@ -19,11 +19,11 @@ export default function ItemMovies({ movie }: { movie: any }) {
         src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
         alt={movie.title}
         width={500}
-        height={500}
+        height={320}
         priority
         placeholder="blur"
         blurDataURL={blurDataURL}
-        className="w-full h-[19.5vw] object-cover rounded-t-md"
+        className="w-full h-auto aspect-[2/3] object-cover rounded-t-md"
       />
       <div className="p-4">
         <h1 className="text-lg font-bold line-clamp-1">{movie.title}</h1>
