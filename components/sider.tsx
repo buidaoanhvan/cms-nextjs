@@ -3,6 +3,7 @@ import { UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
 import Link from "next/link";
 const { Sider } = Layout;
 import { useRouter, usePathname } from "next/navigation";
+import Logo from "./logo";
 
 export default function SiderBar({
   collapsed,
@@ -46,13 +47,7 @@ export default function SiderBar({
       trigger={null}
     >
       <Link href="/" className="flex items-center justify-center p-4">
-        <Image
-          preview={false}
-          src="/logo.svg"
-          alt="logo"
-          width={30}
-          height={30}
-        />
+        <Logo width={32} height={32} />
       </Link>
       <Menu
         theme="dark"
