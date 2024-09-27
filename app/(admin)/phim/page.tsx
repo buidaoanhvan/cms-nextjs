@@ -1,7 +1,7 @@
 import ListMovies from "@/components/listMovies";
 import { Suspense } from "react";
 
-export default function Home({
+export default function SettingsPage({
   searchParams,
 }: {
   searchParams: { page: string };

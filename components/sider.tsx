@@ -24,11 +24,11 @@ export default function SiderBar({
       },
     },
     {
-      key: "/settings",
+      key: "/phim",
       icon: <VideoCameraOutlined />,
       label: "Cài đặt",
       onClick: () => {
-        router.push("/settings");
+        router.push("/phim");
       },
     },
   ];

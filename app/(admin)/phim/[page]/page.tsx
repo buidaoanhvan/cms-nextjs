@@ -1,12 +1,8 @@
 import ListMovies from "@/components/listMovies";
 import { Suspense } from "react";
 
-export default function Home({
-  searchParams,
-}: {
-  searchParams: { page: string };
-}) {
-  const page = searchParams.page ? parseInt(searchParams.page) : 1;
+export default function SettingsPage({ params }: { params: { page: string } }) {
+  const page = params ? parseInt(params.page) : 1;
   return (
     <section>
       <Suspense
