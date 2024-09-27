@@ -23,10 +23,8 @@ export default function LayoutDashboard({
           <HeaderBar collapsed={collapsed} setCollapsed={setCollapsed} />
           <Content style={{ margin: "24px 16px 0" }}>
             <div
+              className="h-full overflow-auto p-5"
               style={{
-                padding: 24,
-                height: "100%",
-                overflow: "auto",
                 background: colorBgContainer,
                 borderRadius: borderRadiusLG,
               }}

@@ -3,10 +3,13 @@ import { Form, Input, Button, Checkbox, Flex } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Logo from "@/components/logo";
+import { useRouter } from "next/navigation";
 
 export default async function LoginPage() {
+  const router = useRouter();
   const onFinish = (values: any) => {
     console.log("Received values of form: ", values);
+    router.push("/");
   };
 
   return (

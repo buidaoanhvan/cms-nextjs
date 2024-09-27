@@ -37,6 +37,7 @@ export default function SiderBar({
     <Sider
       breakpoint="lg"
       collapsedWidth="0"
+      width={250}
       collapsed={collapsed}
       onBreakpoint={(broken) => {
         setCollapsed(broken);
