@@ -146,8 +146,10 @@ export default function RegisterPage() {
       onFinish: (values: number) => {
         console.log(values);
         modal.success({
-          title: "Đăng ký thành công",
-          content: "Bạn đã đăng ký thành công hãy đăng nhập để sử dụng",
+          centered: true,
+          title: "Thành công",
+          content:
+            "Quý khách đã đăng ký thành công, hãy đăng nhập để sử dụng dịch vụ, xin cảm ơn!",
           okText: "Đăng nhập ngay",
           onOk: () => {
             router.push("/dang-nhap");
