@@ -131,7 +131,7 @@ export default function RegisterPage() {
             rules={[{ validator: validateOTP }]}
           >
             <Input.OTP
-              formatter={(str) => str.replace(/\D/g, "")}
+              formatter={(str) => str.toUpperCase()}
               length={5}
               size="large"
               style={{ width: "100%" }}
