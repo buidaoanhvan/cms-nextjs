@@ -1,5 +1,13 @@
 "use client";
-import { Form, Input, Button, Checkbox, Flex, InputNumber } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Checkbox,
+  Flex,
+  InputNumber,
+  Typography,
+} from "antd";
 import { LockOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Logo from "@/components/logo";
@@ -28,7 +36,10 @@ export default function LoginPage() {
 
   return (
     <Flex vertical gap={24} style={{ maxWidth: 333, width: "100%" }}>
-      <Logo width={40} height={40} title="Đăng nhập CMS" />
+      <Logo width={80} height={80} />
+      <Typography.Title level={3} style={{ textAlign: "center" }}>
+        Đăng nhập BitPOS
+      </Typography.Title>
       <Form style={{ width: "100%" }} onFinish={onFinish}>
         <Form.Item
           key="phone"

@@ -1,6 +1,15 @@
 "use client";
 import { useState } from "react";
-import { Form, InputNumber, Button, Flex, Steps, Input, App } from "antd";
+import {
+  Form,
+  InputNumber,
+  Button,
+  Flex,
+  Steps,
+  Input,
+  App,
+  Typography,
+} from "antd";
 import { LockOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Logo from "@/components/logo";
@@ -161,7 +170,10 @@ export default function RegisterPage() {
 
   return (
     <Flex vertical gap={24} style={{ maxWidth: 333, width: "100%" }}>
-      <Logo width={40} height={40} title="Đăng ký CMS" />
+      <Logo width={80} height={80} />
+      <Typography.Title level={3} style={{ textAlign: "center" }}>
+        Đăng ký BitPOS
+      </Typography.Title>
       <Steps
         current={current}
         size="small"

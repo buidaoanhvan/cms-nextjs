@@ -48,7 +48,7 @@ export default function SiderBar({
       trigger={null}
     >
       <Link href="/" className="flex items-center justify-center p-4">
-        <Logo width={32} height={32} title="CMS" titleColor="#fff" />
+        <Logo width={60} height={60} title="BitPOS" titleColor="#fff" />
       </Link>
       <Menu
         theme="dark"

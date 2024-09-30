@@ -15,10 +15,11 @@ export default function Logo({
     <Flex justify="center" align="center">
       <Image
         preview={false}
-        src="/logo.svg"
+        src="/logo.png"
         alt="logo"
         width={width}
         height={height}
+        className="bg-[#1677ff] p-1 rounded-xl"
       />
       <Typography.Title
         level={3}
