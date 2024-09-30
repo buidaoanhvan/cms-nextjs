@@ -80,6 +80,8 @@ export default function RegisterPage() {
             controls={false}
             autoComplete="on"
             addonBefore="+84"
+            type="number"
+            inputMode="numeric"
           />
         </Form.Item>
       ),

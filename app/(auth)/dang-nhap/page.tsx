@@ -43,6 +43,8 @@ export default function LoginPage() {
             controls={false}
             autoComplete="on"
             addonBefore="+84"
+            type="number"
+            inputMode="numeric"
           />
         </Form.Item>
         <Form.Item name="password">
