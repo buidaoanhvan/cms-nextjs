@@ -1,12 +1,26 @@
 "use client";
-import { Form, Input, Button, Checkbox, Flex } from "antd";
-import { MailOutlined, LockOutlined } from "@ant-design/icons";
+import { Form, Input, Button, Checkbox, Flex, InputNumber } from "antd";
+import { LockOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Logo from "@/components/logo";
 import { useRouter } from "next/navigation";
 
-export default async function LoginPage() {
+export default function LoginPage() {
   const router = useRouter();
+
+  const validatePhoneNumber = (rule: any, value: any) => {
+    if (!value) {
+      return Promise.reject("Vui lòng nhập số điện thoại");
+    }
+    value = "84" + value.toString();
+    //định dạng số điện thoại việt nam Regex
+    const regexPhoneNumber = /(84[3|5|7|8|9])+([0-9]{8})\b/g;
+    if (!regexPhoneNumber.test(value.toString())) {
+      return Promise.reject("Số điện thoại không đúng định dạng");
+    }
+    return Promise.resolve();
+  };
+
   const onFinish = (values: any) => {
     console.log("Received values of form: ", values);
     router.push("/");
@@ -16,12 +30,19 @@ export default async function LoginPage() {
     <Flex vertical gap={24} style={{ maxWidth: 333, width: "100%" }}>
       <Logo width={40} height={40} title="Đăng nhập CMS" />
       <Form style={{ width: "100%" }} onFinish={onFinish}>
-        <Form.Item name="email">
-          <Input
-            placeholder="Nhập địa chỉ email"
+        <Form.Item
+          key="phone"
+          name="phone"
+          required={true}
+          rules={[{ validator: validatePhoneNumber }]}
+        >
+          <InputNumber
+            style={{ width: "100%" }}
+            placeholder="Nhập số điện thoại"
             size="large"
+            controls={false}
             autoComplete="on"
-            prefix={<MailOutlined />}
+            addonBefore="+84"
           />
         </Form.Item>
         <Form.Item name="password">
