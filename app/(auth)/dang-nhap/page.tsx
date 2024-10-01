@@ -7,14 +7,19 @@ import {
   Flex,
   InputNumber,
   Typography,
+  App,
 } from "antd";
 import { LockOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Logo from "@/components/logo";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { authApi } from "@/utils/api";
 
 export default function LoginPage() {
   const router = useRouter();
+  const { message } = App.useApp();
+  const [loadingBtn, setLoadingBtn] = useState(false);
 
   const validatePhoneNumber = (rule: any, value: any) => {
     if (!value) {
@@ -29,9 +34,17 @@ export default function LoginPage() {
     return Promise.resolve();
   };
 
-  const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
-    router.push("/");
+  const onFinish = async (values: any) => {
+    try {
+      setLoadingBtn(true);
+      await authApi.login(values.phone, values.password);
+      setLoadingBtn(false);
+      message.success("Đăng nhập thành công");
+      router.push("/");
+    } catch (error: any) {
+      setLoadingBtn(false);
+      message.error(error.message);
+    }
   };
 
   return (
@@ -74,7 +87,13 @@ export default function LoginPage() {
           </Flex>
         </Form.Item>
         <Form.Item>
-          <Button block type="primary" htmlType="submit" size="large">
+          <Button
+            block
+            type="primary"
+            htmlType="submit"
+            size="large"
+            loading={loadingBtn}
+          >
             Đăng nhập
           </Button>
         </Form.Item>

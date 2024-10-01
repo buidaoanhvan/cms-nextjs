@@ -14,11 +14,13 @@ import { LockOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Logo from "@/components/logo";
 import { useRouter } from "next/navigation";
+import { authApi } from "@/utils/api";
 
 export default function RegisterPage() {
   const [current, setCurrent] = useState(0);
   const [form] = Form.useForm();
-  const { message, modal } = App.useApp();
+  const [loadingBtn, setLoadingBtn] = useState<boolean>(false);
+  const { message } = App.useApp();
   const router = useRouter();
   const validatePhoneNumber = (rule: any, value: any) => {
     if (!value) {
@@ -94,9 +96,17 @@ export default function RegisterPage() {
           />
         </Form.Item>
       ),
-      onFinish: (values: any) => {
-        message.success("OTP đã được gửi đến số điện thoại 0" + values.phone);
-        next();
+      onFinish: async (values: any) => {
+        try {
+          setLoadingBtn(true);
+          await authApi.register(values.phone);
+          message.success("OTP đã được gửi đến số điện thoại 0" + values.phone);
+          setLoadingBtn(false);
+          next();
+        } catch (error: any) {
+          setLoadingBtn(false);
+          message.error(error.message);
+        }
       },
     },
     {
@@ -143,7 +153,7 @@ export default function RegisterPage() {
           >
             <Input.OTP
               formatter={(str) => str.toUpperCase()}
-              length={5}
+              length={4}
               size="large"
               style={{ width: "100%" }}
               type="number"
@@ -152,22 +162,26 @@ export default function RegisterPage() {
           </Form.Item>
         </>
       ),
-      onFinish: (values: number) => {
-        console.log(values);
-        modal.success({
-          centered: true,
-          title: "Thành công",
-          content:
-            "Quý khách đã đăng ký thành công, hãy đăng nhập để sử dụng dịch vụ, xin cảm ơn!",
-          okText: "Đăng nhập ngay",
-          onOk: () => {
-            router.push("/dang-nhap");
-          },
-        });
+      onFinish: async (values: any) => {
+        try {
+          setLoadingBtn(true);
+          const phone = form.getFieldValue("phone");
+          await authApi.initPassword(
+            phone,
+            values.otp,
+            values.password,
+            values["re-password"]
+          );
+          setLoadingBtn(false);
+          message.success("Đăng ký thành công");
+          router.push("/dang-nhap");
+        } catch (error: any) {
+          setLoadingBtn(false);
+          message.error(error.message);
+        }
       },
     },
   ];
-
   return (
     <Flex vertical gap={24} style={{ maxWidth: 333, width: "100%" }}>
       <Logo width={80} height={80} />
@@ -194,7 +208,13 @@ export default function RegisterPage() {
       >
         {steps[current].content}
         <Form.Item>
-          <Button block type="primary" htmlType="submit" size="large">
+          <Button
+            block
+            type="primary"
+            htmlType="submit"
+            size="large"
+            loading={loadingBtn}
+          >
             Tiếp tục
           </Button>
         </Form.Item>
