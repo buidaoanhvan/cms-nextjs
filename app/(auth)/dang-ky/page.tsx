@@ -99,7 +99,10 @@ export default function RegisterPage() {
       onFinish: async (values: any) => {
         try {
           setLoadingBtn(true);
-          await authApi.register(values.phone);
+          const data = await authApi.register(values.phone);
+          if (data.code != "00") {
+            throw new Error("Số điện thoại không hợp lệ");
+          }
           message.success("OTP đã được gửi đến số điện thoại 0" + values.phone);
           setLoadingBtn(false);
           next();
@@ -166,13 +169,16 @@ export default function RegisterPage() {
         try {
           setLoadingBtn(true);
           const phone = form.getFieldValue("phone");
-          await authApi.initPassword(
+          const data = await authApi.initPassword(
             phone,
             values.otp,
             values.password,
             values["re-password"]
           );
           setLoadingBtn(false);
+          if (data.code != "00") {
+            throw new Error("Xác thực OTP thất bại");
+          }
           message.success("Đăng ký thành công");
           router.push("/dang-nhap");
         } catch (error: any) {

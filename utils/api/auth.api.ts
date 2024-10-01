@@ -11,11 +11,6 @@ export const login = async (phone: string, password: string) => {
     },
     body: JSON.stringify({ username: phone, password }),
   });
-  //bắt lỗi http
-  if (response.status !== 201) {
-    throw new Error("Đăng nhập thất bại");
-  }
-  //bắt lỗi error code
   const data = await response.json();
   return data;
 };
@@ -29,15 +24,7 @@ export const register = async (username: string) => {
     },
     body: JSON.stringify({ username }),
   });
-  //bắt lỗi http
-  if (response.status !== 201) {
-    throw new Error("Lỗi khi đăng ký");
-  }
-  //bắt lỗi error code
   const data = await response.json();
-  if (data.code == "01") {
-    throw new Error("Số điện thoại đã được đăng kí");
-  }
   return data;
 };
 
@@ -60,10 +47,6 @@ export const initPassword = async (
       confirm_pass: confirmPassword,
     }),
   });
-  //bắt lỗi http
-  if (response.status !== 201) {
-    throw new Error("Lỗi khi khởi tạo mật khẩu");
-  }
   const data = await response.json();
   return data;
 };

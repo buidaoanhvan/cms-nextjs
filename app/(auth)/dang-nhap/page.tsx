@@ -37,8 +37,11 @@ export default function LoginPage() {
   const onFinish = async (values: any) => {
     try {
       setLoadingBtn(true);
-      await authApi.login(values.phone, values.password);
+      const data = await authApi.login(values.phone, values.password);
       setLoadingBtn(false);
+      if (data.code != "00") {
+        throw new Error("Số điện thoại hoặc mật khẩu không đúng");
+      }
       message.success("Đăng nhập thành công");
       router.push("/");
     } catch (error: any) {
